@@ -15,21 +15,15 @@ public class Main extends Application {
 		Application.launch(Main.class, args);
 	}
 
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws FileNotFoundException, MapFormatException {
 		Maze m;
-		try {
-			m = new Maze(new File(getParameters().getRaw().get(0)));
-			primaryStage.setTitle("Pac-Man");
-	        Group root = new Group();
-	        Scene scene = new Scene(root, 300, 250, Color.BLACK);
-	        root.getChildren().add(m);
-	        primaryStage.setScene(scene);
-	        primaryStage.show();
-		} catch (FileNotFoundException e) {
-			System.out.print("Fichier introuvable.");
-		} catch (MapFormatException e) {
-			System.out.print("Fichier incorrect.");
-		}
+		m = new Maze(new File(getParameters().getRaw().get(0)));
+		primaryStage.setTitle("Pac-Man");
+	    Group root = new Group();
+	    Scene scene = new Scene(root, 20 * m.getWIDTH(), 20 * m.getHEIGHT(), Color.BLACK);
+	    root.getChildren().add(m);
+	    primaryStage.setScene(scene);
+	    primaryStage.show();
     }
 
 }

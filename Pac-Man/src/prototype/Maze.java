@@ -33,18 +33,22 @@ public class Maze extends Parent {
 			}
 		}
 		sc.close();
-		//En commentaire, la partie qui déconne.
-		/*Image img = new Image(Maze.class.getResourceAsStream("Wall.jpg"));
-		ImageView iv = new ImageView();
-        iv.setImage(img);
-        iv.setFitWidth(10);
-        iv.setPreserveRatio(true);
-        iv.setSmooth(true);
-        iv.setCache(true);
-        for(int i = 0; i < HEIGHT; i++)
-			for(int j = 0; j < WIDTH; j++)
-				if(board[i][j])
-					this.getChildren().add(iv);*/
+		Image img = new Image(Maze.class.getResourceAsStream("Wall.jpg"));
+		for(int i = 0; i < HEIGHT; i++) {
+			for(int j = 0; j < WIDTH; j++) {
+				if(board[i][j]) {
+					ImageView iv = new ImageView();
+			        iv.setImage(img);
+			        iv.setFitWidth(20);
+			        iv.setPreserveRatio(true);
+			        iv.setSmooth(true);
+			        iv.setCache(true);
+			        iv.setX(20 * j);
+			        iv.setY(20 * i);
+					this.getChildren().add(iv);
+				}
+			}
+        }
 	}
 
 	public String toString() {
