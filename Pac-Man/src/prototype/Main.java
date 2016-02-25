@@ -1,5 +1,6 @@
 package prototype;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -11,19 +12,34 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	public static void main(String[] args) {
-		Application.launch(Main.class, args);
+	public static final int TILE_SIZE = 20;
+
+	public static void main(String[]args) {
+		launch(args);
 	}
 
-	public void start(Stage primaryStage) throws FileNotFoundException, MapFormatException {
-		Maze m;
-		m = new Maze(new File(getParameters().getRaw().get(0)));
-		primaryStage.setTitle("Pac-Man");
-	    Group root = new Group();
-	    Scene scene = new Scene(root, 20 * m.getWIDTH(), 20 * m.getHEIGHT(), Color.BLACK);
-	    root.getChildren().add(m);
-	    primaryStage.setScene(scene);
-	    primaryStage.show();
-    }
+	public void start(Stage stage) {
+		try {
+			Maze m = new Maze(new File(getParameters().getRaw().get(0)));
+			PacMan pm = new PacMan();
+			Group root = new Group();
+			root.getChildren().add(m);
+			root.getChildren().add(pm);
+			Scene scene = new Scene(root, TILE_SIZE * m.getWIDTH(), TILE_SIZE * m.getHEIGHT(), Color.BLACK);
+			stage.setScene(scene);
+			stage.setTitle("Pac-Man");
+			stage.show();
+			DirectionChange dc = new DirectionChange();
+			scene.setOnKeyPressed(dc);
+			CharacterAnimation ca = new CharacterAnimation(dc, pm);
+			ca.start();
+		} catch (FileNotFoundException e) {
+			System.out.print("Fichier labyrinthe introuvable.");
+			System.exit(0);
+		} catch (MapFormatException e) {
+			System.out.print("Fichier labyrinthe incorrect.");
+			System.exit(0);
+		}
+	}
 
 }

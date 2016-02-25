@@ -39,12 +39,12 @@ public class Maze extends Parent {
 				if(board[i][j]) {
 					ImageView iv = new ImageView();
 			        iv.setImage(img);
-			        iv.setFitWidth(20);
+			        iv.setFitWidth(Main.TILE_SIZE);
 			        iv.setPreserveRatio(true);
 			        iv.setSmooth(true);
 			        iv.setCache(true);
-			        iv.setX(20 * j);
-			        iv.setY(20 * i);
+			        iv.setX(Main.TILE_SIZE * j);
+			        iv.setY(Main.TILE_SIZE * i);
 					this.getChildren().add(iv);
 				}
 			}
