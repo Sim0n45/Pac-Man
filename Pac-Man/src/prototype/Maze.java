@@ -10,8 +10,9 @@ import javafx.scene.image.ImageView;
 
 public class Maze extends Parent {
 
-	private final int HEIGHT = 36, WIDTH = 28;
+	private final int HEIGHT = 31, WIDTH = 28;
 	private boolean[][] board = new boolean[HEIGHT][WIDTH];
+	private int spawnTileX, spawnTileY;
 
 	public Maze(File f) throws MapFormatException, FileNotFoundException {
 		Scanner sc = new Scanner(f);
@@ -29,7 +30,12 @@ public class Maze extends Parent {
 			}
 			for(int j = 0; j < WIDTH; j++) {
 				char c = str.charAt(j);
-				board[i][j] = (c == '0');
+				if(c == 'x') {
+					spawnTileX = j;
+					spawnTileY = i + 3;
+				} else {
+					board[i][j] = (c == '0');
+				}
 			}
 		}
 		sc.close();
@@ -44,7 +50,7 @@ public class Maze extends Parent {
 			        iv.setSmooth(true);
 			        iv.setCache(true);
 			        iv.setX(Main.TILE_SIZE * j);
-			        iv.setY(Main.TILE_SIZE * i);
+			        iv.setY(Main.TILE_SIZE * (i + 3));
 					this.getChildren().add(iv);
 				}
 			}
@@ -75,6 +81,14 @@ public class Maze extends Parent {
 
 	public boolean[][] getBoard() {
 		return board;
+	}
+
+	public int getSpawnTileX() {
+		return spawnTileX;
+	}
+
+	public int getSpawnTileY() {
+		return spawnTileY;
 	}
 
 }

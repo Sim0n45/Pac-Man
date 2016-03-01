@@ -21,11 +21,11 @@ public class Main extends Application {
 	public void start(Stage stage) {
 		try {
 			Maze m = new Maze(new File(getParameters().getRaw().get(0)));
-			PacMan pm = new PacMan();
+			PacMan pm = new PacMan(m);
 			Group root = new Group();
 			root.getChildren().add(m);
 			root.getChildren().add(pm);
-			Scene scene = new Scene(root, TILE_SIZE * m.getWIDTH(), TILE_SIZE * m.getHEIGHT(), Color.BLACK);
+			Scene scene = new Scene(root, TILE_SIZE * m.getWIDTH(), TILE_SIZE * (m.getHEIGHT() + 5), Color.BLACK);
 			stage.setScene(scene);
 			stage.setTitle("Pac-Man");
 			stage.show();
